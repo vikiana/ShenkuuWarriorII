@@ -1,0 +1,78 @@
+﻿/* AS3
+	Copyright 2008
+*/
+package com.neopets.util.collision.geometry.trails
+{
+	import com.neopets.util.collision.geometry.BoundedArea;
+	import com.neopets.util.collision.geometry.PolygonStrip;
+	import com.neopets.util.collision.geometry.CompositeArea;
+	import flash.events.Event;
+	
+	/**
+	 *	This class tries to create a motion trail for given point area.
+	 * 
+	 *	@langversion ActionScript 3.0
+	 *	@playerversion Flash 9.0
+	 *	@Pattern AbstractClass
+	 * 
+	 *	@author David Cary
+	 *	@since  10.05.2009
+	 */
+	public class PolygonAreaTrail extends LineAreaTrail
+	{
+		
+		//--------------------------------------
+		// CLASS CONSTANTS
+		//--------------------------------------
+		
+		//--------------------------------------
+		//  PRIVATE VARIABLES
+		//--------------------------------------
+		
+		//--------------------------------------
+		//  CONSTRUCTOR
+		//--------------------------------------
+		
+		/**
+		 *	@Constructor
+		 */
+		public function PolygonAreaTrail(shape:BoundedArea=null):void{
+			super(shape);
+		}		
+		
+		//--------------------------------------
+		//  GETTER/SETTERS
+		//--------------------------------------
+		
+		//--------------------------------------
+		//  PUBLIC METHODS
+		//--------------------------------------
+		
+		/**
+		 * @This function checks for changes in the area an creates a new trail from those changes.
+		 */
+		 
+		override public function update():void {
+			if(_area == null) return;
+			// check area's current state
+			var pts:Array = _area.clonePoints();
+			// create the trail
+			var comp:CompositeArea = new CompositeArea();
+			comp.addArea(_area);
+			comp.addArea(new PolygonStrip(prevPoints,pts,true));
+			_trail = comp;
+			// record the new state
+			prevPoints = pts;
+		}
+		
+		//--------------------------------------
+		//  EVENT HANDLERS
+		//--------------------------------------
+		
+		//--------------------------------------
+		//  PRIVATE & PROTECTED INSTANCE METHODS
+		//--------------------------------------
+		
+	}
+	
+}

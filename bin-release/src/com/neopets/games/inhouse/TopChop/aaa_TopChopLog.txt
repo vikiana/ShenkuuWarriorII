@@ -1,0 +1,73 @@
+=====================
+===== TO DO: ========
+=====================
+- make points appear after hit has happened
+- fix chinese space issues (see email)
+- adjust size of logo in other langs
+- change sizes of elements in library after everything is approved (instead of setting them in code)
+- maybe I don't need to pass x coordinate to Slider. seems to be set throughout game
+- refine timer
+- make sure timer is stopped and deactivated
+- slider event listener is not removed when restarting the game a second time!
+- reset mHasPowerUp
+- call removePowerUp in Scoreboard whenever game ends
+- find solution for when two power ups are displayed and both have event listener
+  - idea: put in array and clear it
+- determine center hit bonus with help of qa
+- add sound
+- load distractions according to background
+- get rid of "time wasted" animation and just use disappointed?
+- track and reset GameVars.mSenseiStatus
+- reset boni
+
+
+=====================
+==== QUESTIONS: =====
+=====================
+- what's up with timer?
+- should power ups be permanent for the stage or should they have a time limit (example super hasee bounce)?
+- what should happen when timer up exactly? modify point reward? game over?
+- let's start title exploration
+- power up placing?
+- should power up increase sweet spot or green zone?
+
+=====================
+==== ART NEEDED: ====
+=====================
+- appear animation for power ups
+- buttons
+
+=====================
+===== DONE: =========
+=====================
+- reset cricket animation when end game is clicked
+- rip instructions out of GameMenu
+- black gi in stage 13
+- award power ups for 3 center hits total, not just 3 in a row
+- display stats in pop up screen
+- detect if power up is already active and don't give that one as an option
+- make last 3 stages be not unlockable
+- make collision detection based on upper and lower edge of slider, safe zone and super safe zone
+- start slider at random point on meter at level start
+- award points based on distance between slider and super safe zone instead of meter center
+- count times that super safe green zone was hit
+- remove everything to do with test buttons and integrate functionality into game
+- fix issue with sound and music button
+- don't display continue button if user can choose between 2 power ups
+  power up will function as continue button
+- activate power up with mouse
+- disable end game button between stages
+- repeat same level when extra life, don't move on to next level
+
+=====================  
+===== TESTING: ======
+=====================
+- unlocked levels
+- timer
+- slider speed
+- slider stutter
+- randomized slider
+- safe zone animation
+- reset grand hall background
+- reset power ups to receive one and not all 3
+- sending second currentStage argument

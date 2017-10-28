@@ -1,0 +1,36 @@
+LEDGE_CLOUD_DISSOLVE > too cruel? YES
+
+
+
+
+
+FORMATTED STRING REPLACEMENT
+
+
+
+
+
+SKY LEVEL > fix from second batch on:WHAT A MESS!
+
+SKY BKG
+
+sky_bkg:(second half) from #FCD7AD to #A0679B with tint #CCA037 of 24%
+sky_bkg2: (first half) from #A0679B to #3E3171 with tint #CCA037 of 24%
+	 (second half) from ##3E3171 to #484995
+sky_bkg3: (all)#484995 with tint #CCA037 of 24%
+
+
+
+
+FOUND BUGS
+
+
+- can't send score in offline mode
+
+
+SOUNDS FIXES
+
+celebration music, longer, fade out more smoothely OR loop
+
+PP power up sound shorter
+

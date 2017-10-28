@@ -1,0 +1,56 @@
+IDS_SLOW_DOWN_MESSAGE = "<p align='center'><font size='33'>SLOW DOWN!</font></p>";
+		
+IDS_BTN_INSTRUCTION = "<p align='center'><font size='22'>HOW TO PLAY</font></p>";
+IDS_BTN_START = "<p align='center'><font size='22'>Start</font></p>";		
+IDS_BTN_BACK = "<p align='center'><font size='22'>Back</font></p>";
+IDS_BTN_SENDSCORE = "<p align='center'><font size='22'>Send Score</font></p>";
+IDS_BTN_PLAYAGAIN = "<p align='center'><font size='22'>Play Again</font></p>";
+IDS_BTN_TRYAGAIN = "<p align='center'><font size='22'>Try Again</font></p>";
+IDS_BTN_NEXTLEVEL = "<p align='center'><font size='22'>Next Level</font></p>";
+IDS_BTN_QUIT = "<p align='center'><font size='14'>Quit</font></p>";
+		
+IDS_BTN_MODE1 = "<p align='center'><font size='22'>TRAINING</font></p>";
+IDS_BTN_MODE2 = "<p align='center'><font size='22'>ZEN MASTER</font></p>";
+IDS_BTN_NEXT = "<p align='center'><font size='22'>Next</font></p>";
+		
+IDS_CHOOSEMODE_TITLE=  "<p align='center'><font size='32'>CHOOSE MODE</font></p>";
+IDS_TMODE_COPY=  "<p align='left'><font size='14'>Are you ready to begin your training? Your first challenge is the forest. Good luck!</font></p>";
+IDS_ZENMODE_COPY=  "<p align='left'><font size='14'>Are the skies the limit to your skills? Or have you learned enough to climb through the clouds themselves? Find out in the Zen Master level!</font></p>";
+	
+IDS_INSTRUCTIONS_TITLE=  "<p align='center'><font size='32'>HOW TO PLAY</font></p>";
+IDS_INSTRUCTIONS_COPY=  "<p align='left'><font size='14'>Use your mouse to aim your grappling hook at a platform, then click the mouse button to shoot your hook. As soon as you've hit the platform, start aiming for the next one! <BR><BR>You can train the princess in Training Mode, in which she'll hone her warrior skills in the forest and on the mountain. Or she can put those skills to the test in Zen Master Mode, where she'll use her grappling hook to soar from cloud to cloud in the skies above Shenkuu!</font></p>";
+IDS_INSTRUCTIONS_COPY3 = "<p align='left'><font size='11'>Keep an eye out for family crest bonuses (single or clustered in formations) and powerups. You can collect the powerups by hovering over them with your mouse as you guide the princess upward, or the princess can pick them up as she passes them. Be careful not to use your grappling hook too often, because your score is based on speed as well as accuracy.</font></p>";
+
+IDS_INSTRUCTIONS_COPY1=  "<p align='left'><font size='12'>POWERUPS:</font></p><p align='left'><font size='11'>Kite: lifts the princess up for a short amount of time without using the grappling hook.  You'll collect the powerup when you grip on its ledge with your hook.<br>Petpet: gives the princess a super-lift and lets her automatically collect all the crests she passes.<br>Balloon: In the Sky level, allows the princess to create an inflatable ledge by pressing the spacebar. Each balloon awards 5 ledges.</font></p>";
+IDS_INSTRUCTIONS_COPY2=  "<p align='left'><font size='12'>FAMILY CRESTS:</font></p><p align='left'><font size='11'>The crests will boost your score, and if you collect all of the crests in a cluster, you'll double your points. </font></p>";
+		
+IDS_BTN_CHOOSEMODE = "<p align='center'><font size='22'>Choose Level</font></p>";
+IDS_BTN_FIRSTLEVEL = "<p align='center'><font size='22'>FOREST</font></p>";
+IDS_BTN_SECONDLEVEL = "<p align='center'><font size='22'>HIGH MOUNTAIN</font></p>";
+IDS_BTN_THIRDLEVEL = "<p align='center'><font size='22'>ICED MOUNTAIN</font></p>";
+IDS_BTN_FOURTHLEVEL = "<p align='center'><font size='22'>SKY</font></p>";
+
+ALTITUDE_TITLE = "<p align='center'><font size='12'>ALTITUDE</font></p>";
+TIME_TITLE = "<p align='center'><font size='12'>TIME</font></p>";
+POINTS_TITLE = "<p align='center'><font size='12'>POINTS</font></p>";
+		
+IDS_SCORE_TITLE = "<p align='center'><font size='30'>RESULTS</font></p>";
+
+IDS_SCORE_ALTITUDE = "<p align='center'><font size='22'>ALTITUDE:</font></p>";
+IDS_SCORE_TIME = "<p align='center'><font size='22'>TIME:</font></p>";
+IDS_SCORE_POINTS = "<p align='center'><font size='22'>POINTS:</font></p>";
+IDS_SCORE_ACCURACY = "<p align='center'><font size='24'>ACCURACY:</font></p>";
+IDS_SCORE_LSCORE = "<p align='center'><font size='22'>LEVEL SCORE:</font></p>";
+IDS_SCORE_SCORE = "<p align='center'><font size='24'>TOTAL SCORE:</font></p>";
+
+IDS_UNIT = "feet";
+		
+IDS_POPUP_FAIL_COPY = "<p align='center'><font size='20'>Sorry, but the princess has failed to complete her training.</font></p>";
+IDS_POPUP_FAIL_SKY_COPY = "<p align='center'><font size='18'>You reached $altitude. A true warrior never gives up, so why not try again? You'll be flying in no time!</font></p>";
+
+IDS_ENDLEVEL_TITLE = "<p align='center'><font size='30'>CONGRATULATIONS!</font></p>";
+IDS_ENDLEVEL_COPY1 = "<p align='center'><font size='20'>You've found your way through the forest. Time to conquer the mountain!</font></p>";
+IDS_ENDLEVEL_COPY2 = "<p align='center'><font size='20'>You've scrambled up the high mountain. Let your will carry you to the icy mountain top!</font></p>";
+IDS_ENDLEVEL_COPY3 = "<p align='center'><font size='20'>Congratulations, your warrior training is complete! Now let your spirit soar through the skies of Shenkuu!</font></p>";
+
+IDS_POPUP_QUIT_COPY = "<p align='center'><font size='16'>Sorry to see you go.<br>Come back soon for more warrior's training!</font></p>";

@@ -1,0 +1,240 @@
+//-------------------------------------------------------------
+obj.getRandomPickup = function() {
+	//--------------------------------------
+	var pList = this.pickupList;
+	var randNum = random(100);
+	//which set of items to choose
+	var rType;
+	//-----------------------------------
+	if (randNum < 78) {
+		rType = "Common";
+	} else if (randNum >= 78 and randNum < 98) {
+		rType = "Uncommon";
+	} else if (randNum >= 98) {
+		rType = "Rare";
+	}
+	//--------------------------------------
+	//common 0-77
+	//uncommon 78-97
+	//rare 98-100
+	//--------------------------------------
+	var tempList = [];
+	var max = pList.length;
+	for (var x = 0; x < max; x++) {
+		var obj = pList[x];
+		if (obj.getRarity() == rType) {
+			tempList.push(obj);
+		}
+	}
+	var finalPick = tempList[random(tempList.length)];
+	return finalPick;
+};
+//-------------------------------------------------------------
+obj.getCard = function() {
+	var cardIndex = Math.max(0, this.pCardIndex);
+	var cardObj = this.pCardObjects[cardIndex];
+	return cardObj;
+};
+obj.getCardsLeft = function() {
+	var maxCards = this.pCardObjects.length;
+	trace("maxCards: " + maxCards);
+	var cards = maxCards - (this.pCardIndex + 1);
+	return cards;
+};
+//load the card BEFORE  it's needed, allowing it to cache (similar to importFileInto, downloadNetThing)
+obj.preloadCardImage = function() {
+	//loader clip, has actions
+	var cardLoader = _root.createEmptyMovieClip("cardLoader", 1000);
+	//holder clip, what the jpg is loaded into
+	var cardHolder = cardloader.createEmptyMovieClip("cardHolder", 1);
+	var card = this.getCard();
+	var fileName = card.getFileName();
+	//
+	loadMovie(fileName, cardHolder);
+	cardLoader._visible = 0;
+	cardLoader.onEnterFrame = function() {
+		var loadedBytes = this.cardHolder.getBytesLoaded();
+		var totalBytes = this.cardHolder.getBytesTotal();
+		if (loadedBytes == totalBytes and totalBytes > 100) {
+			this.removeMovieClip();
+		}
+	};
+};
+obj.swapBackground = function() {
+	trace("SWAP THE BACKGROUND");
+	var next_bg = this.nextBG.bgHolder;
+	_root.nextBG.swapDepths(_root.currentBG);
+	if (this.currentBG == _root.currentBG) {
+		this.currentBG = _root.nextBG;
+		this.nextBG = _root.currentBG;
+	} else {
+		this.currentBG = _root.currentBG;
+		this.nextBG = _root.nextBG;
+	}
+};
+//preload a new background every 6 levels (level 2 loads for level 7, etc)
+obj.preloadBackgroundImage = function() {
+	this.pBGIndex++;
+	//
+	trace("loading background image " + this.pBGIndex);
+	//
+	//loader clip, has actions
+	//holder clip, what the jpg is loaded into
+	var nextBGImage = this.nextBG;
+	nextBGImage.doneLoading = 0;
+	var bgHolder = nextBGImage.bgHolder;
+	var imageFile = "http://images.neopets.com/games/wizards_game/backgrounds/bg" + (this.pBGIndex) + ".jpg";
+	loadMovie(imageFile, bgHolder);
+};
+obj.onEnemyDeath = function() {
+	this.changeScoreBy(this.eKillPts);
+	this.pWorld.sb.updateScore();
+};
+obj.getTimeBonus = function() {
+	return this.eTimeBonus.show();
+};
+//-------------------------------------------------------
+obj.setTimeBonus = function(num) {
+	this.eTimeBonus.changeto(num);
+};
+//-------------------------------------------------------
+obj.changeScoreBy = function(num) {
+	this.eScore.changeby(num);
+	this.pWorld.sb.updateScore();
+	//check for 10,000, 100,100 pts
+	if (this.eScore.show() >= 10000 and !this.gotTenThousandBonus) {
+		trace("10,000 score bonus --give a life");
+		this.gotTenThousandBonus = 1;
+		this.eLives.changeBy(1);
+		this.pWorld.sb.addALife();
+	} else if (this.eScore.show() >= 100000 and !this.gotHundredThousandBonus) {
+		this.gotHundredThousandBonus = 1;
+		trace("10,000 score bonus --give a life");
+		this.eLives.changeBy(1);
+		this.pWorld.sb.addALife();
+	}
+};
+//-------------------------------------------------------
+obj.getMap = function() {
+	var index = this.eLevel.show() - 1;
+	var map = this.mapList[index];
+	return map;
+};
+obj.getRow = function(mc) {
+	var row = Math.floor(mc._y / this.pTileHeight);
+	return row;
+};
+obj.getCol = function(mc) {
+	var col = Math.floor(mc._x / this.pTileWidth);
+	return col;
+};
+obj.fadeMusic = function(dir) {
+	this.music_mc.fadeMusic(dir);
+};
+obj.startMusic = function() {
+	if (_root.music_mc != undefined) {
+		return;
+	}
+	this.music_mc = _root.createEmptyMovieClip("music_mc", 9000);
+	this.music_mc.mcExtends(MusicPlayerClass);
+	this.music_mc.startMusic();
+	this.fadeMusic("in");
+};
+//-------------------------------------------------------
+obj.onGetPickup = function(pts) {
+	this.changeScoreBy(pts);
+	this.pWorld.sb.updateScore();
+};
+obj.onPlayerDeath = function() {
+	this.eLives.changeby(-1);
+	if (this.eLives.show() <= 0) {
+		this.broadCastMessage("onGameOver");
+	}
+};
+obj.onResetLevel = function() {
+	this.broadCastMessage("onResetLevel");
+};
+obj.checkAllLevelsClear = function() {
+	if (this.eLevel.show() == this.pMaxLevels) {
+		return 1;
+	}
+	return 0;
+};
+obj.getGraphicsSet = function() {
+	return this.pGraphicsSet;
+};
+//-------------------------------------------------------
+obj.nextLevel = function() {
+	//increment the level
+	this.eLevel.changeby(1);
+	//every 7 levels, preload the next card
+	if (this.eLevel.show() % 7 == 0) {
+		this.pCardIndex++;
+		//load the 1st card
+		this.preloadCardImage();
+		//whichever card to show
+		//swap out the background
+	}
+	//level 7,13,etc...swap background
+	if (this.pLastGraphicsSet != this.pGraphicsSet) {
+		this.pLastGraphicsSet = this.pGraphicsSet;
+		this.swapBackground();
+	}
+	//Neostatus
+	gMyNeoStatus.sendTag("Reached Level " + this.eLevel.show());
+	//start the level
+	this.broadCastMessage("onNextLevel");
+	//update the graphics set (bg, tiles, etc. ) to use
+	if (this.eLevel.show() % 6 == 0) {
+		this.pGraphicsSet++;
+	}
+	// level 1,7,13,etc preload the next background .jpg
+	if (this.eLevel.show() % 7 == 0) {
+		trace("level: " + this.eLevel.show());
+		this.preloadBackgroundImage();
+	}
+};
+//-------------------------------------------------------
+// send neostatus finish tag, remove world etc.
+//-------------------------------------------------------
+obj.endGame = function() {
+	gMyNeoStatus.sendTag("Game Finished");
+	this.broadCastMessage("onEndGame");
+	this.nextBG.removeMovieClip();
+	this.currentBG.removeMovieClip();
+	this.music_mc.remove();
+};
+//-------------------------------------------------------
+obj.quitGame = function() {
+	this.broadCastMessage("onQuitGame");
+};
+//-------------------------------------------------------
+obj.getLevel = function() {
+	return this.eLevel.show();
+};
+//-------------------------------------------------------
+obj.getLives = function() {
+	return this.eLives.show();
+};
+//-------------------------------------------------------
+obj.getScore = function() {
+	return this.eScore.show();
+};
+obj.getRoundTime = function() {
+	return this.pRoundTime;
+};
+//-------------------------------------------------------
+// all world buttons should use these methods
+//-------------------------------------------------------
+obj.restartGame = function() {
+	this.endGame();
+	_root.gotoAndStop("resetallframe");
+};
+//-------------------------------------------------------
+obj.sendScore = function() {
+	this.endGame();
+	_root.gotoAndPlay("sendscoreframe");
+};
+//-------------------------------------------------------
+AssetPropFlags(GameClass.prototype, ["init", "endGame", "restartGame", "sendScore", "startGame"], 1);
+//-------------------------------------------------------

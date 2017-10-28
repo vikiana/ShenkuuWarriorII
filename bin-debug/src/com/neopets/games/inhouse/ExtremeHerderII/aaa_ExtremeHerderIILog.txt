@@ -1,0 +1,168 @@
+=====================
+===== TO DO: ========
+=====================
+- remove event listeners from sound and music buttons
+- sometimes petpets are being placed inside obstacle. fix this
+- reset all booleans at end of level
+- detect collision between samrin and balthazar
+- integrate scoring
+- integrate level display and functionality
+- make animation time based
+- pause game while game over pop up is up
+- [ DONE ]create mc inside samrin and base collision detection on that mc
+- [ DONE ]add brushes to sides of game screen as border/obstacles
+- [ DONE ]rotation of chars
+- [ DONE ] move code in hero and balthazar mcs to external class
+- [ DONE ]go to correct walking animation of samrin
+- [ DONE ] make sure samrin can't take more than one petpet
+
+=====================
+=== FUNCTIONALITY: ==
+=====================
+- User controlls Kacheek Samrin with arrow keys
+- Objective: Collect all Petpets on screen and put them into the safe zone / pen before Balthazar catches them
+- All characters, including hero, move with 8 point rotation: N, NE, E, SE, S, SW, W, NW
+  - User can direct Hero NE, SE, SW, and NW by pressing 2 arrow keys at the same time
+- At start of each level, Samrin will be placed in one of the four corners of stage, Balthazar will be placed in the opposite corner and Petpets will be dispersed in Samrins half of the stage.
+- Balthazar will always move towards Petpet that is closest to him.
+
+Power Ups:
+- Freeze Balthazar: Balthazar will be frozen for a short while.
+- Speed Boost: Samrin will run faster for a short while.
+- Gather Point: User can set a gather point anywhere on the stage. Petpets will flock to this gather point for a short while.
+  - This power up will be activated (i.e. the gather point will be "dropped") by pressing the space bar in the desired spot.
+- Carry 2 Petpets: For a short while, Samrin becomes super strong and can carry 2 petpets at the same time.
+
+Levels:
+- Game is designed to be scalable with a core part and optional parts that will be added if time allows.
+  - Core:
+    - Player plays 10(ish) levels of increasing difficulty. Each level will have the same base background but individual elements will vary (e.g. 1st - 3rd level have no obstacles and 4 openings in the pen, 4th - 6th levels have 2 obstacles and only 2 openings in the pen, etc.)
+  - Optional:
+	- After player finishes the levels with the core background, they can unlock levels with another background that resembles another Neopian land
+	- Depending on how much time we have, we can add more unlockable lands/backgrounds
+	- After a land is unlocked, player can start playing in this land next time they start the game
+	- Max NP can be reached slightly easier in unlockable lands so player is motivated to play through the first land and unlock the next one(s)
+
+Ideas:
+- More power ups: Trampolin for pen (like second door), Bridge for water
+- Power Downs? If Balthazar snatches power ups before user does? Opposite effect of power ups?
+- Power ups fall from tree?
+
+===========
+=== ART: ==
+===========
+- level display on score board
+- power ups
+- score board
+- button for sound
+- ingame buttons
+- title screen needs to be size of game screen
+- idle states for samrin
+- frame and background for instructions screen
+- frame and background for game over screen
+
+===============
+=== TESTING: ==
+===============
+var tScoreboard   : Scoreboard = this.getChildByName( "scoreboard" ) as Scoreboard;
+var tChar : Ball = new Ball( 8 );
+
+/**
+ * if balthazar appears in upper right corner
+ * put petpets in lower right corner below pen (LRB)
+ * put petpets in upper left corner left of pen (ULL)
+ */
+var tULLLeft   : Number = 50;
+var tULLRight  : Number = mStage.stageWidth * .5 - tPen.width * .5 - 60;
+var tULLTop    : Number = tScoreboard.height + 40;
+var tULLBottom : Number = mStage.height * .5 - tScoreboard.height - 20;
+
+var tLRBLeft   : Number = mStage.stageWidth * .5;
+var tLRBRight  : Number = mStage.stageWidth * .5 - 40;
+var tLRBTop    : Number = mStage.stageHeight * .5 + tPen.height * .5 + 30;
+var tLRBBottom : Number = mStage.stageHeight * .5 - tPen.height * .5 - 70;
+
+/**
+ * if balthazar appears in upper left corner
+ * put petpets in lower left corner below pen (LLB)
+ * put petpets in upper right corner right of pen (URR)
+ */
+var tURRLeft  : Number = mStage.stageWidth * .5 + tPen.width * .5 + 30;
+var tURRRight : Number = mStage.stageWidth * .5 - tPen.width;
+// tURRTop = tULLTop
+// tURRBottom = tULLBottom
+
+// tLLBLeft = tULLLeft
+var tLLBRight : Number = mStage.width * .5 - tPen.width * .5;
+// tLLBTop = tLRBTop
+// tLLBBottom = tLRBTop
+
+/**
+ * if balthazar appears in lower left corner
+ * put petpets in lower right corner right of pen (LRR)
+ * put petpets in upper left corner above pen (ULA)
+ */
+// tLRRLeft = tURRLeft
+// tLRRight = tURRRight
+var tLRRTop    : Number = mStage.height * .5;
+var tLRRBottom : Number = mStage.height * .5 - tPen.height;
+
+// tULALeft = tULLLeft
+// tULARight = tLLBRight
+// tULATop = tULLTop
+var tULABottom = mStage.stageHeight * .5 - tPen.height - 30;
+
+/**
+ * if balthazar appears in lower right corner
+ * put petpets in lower left corner left of pen (LLL)
+ * put petpets in upper right corner above pen (URA)
+ */
+ // tLLLLeft   = tULLLeft;
+ // tLLLRight  = tULLRight;
+ // tLLLTop    = tLRRTop;
+ // tLLLBottom = tLRRBottom;
+ 
+ // tURALeft   = tLRBLeft
+ // tURARight  = tLRBRight
+ // tURATop    = tULLTop
+ // tURABottom = tULABottom	
+			
+var tPosToggler : int = Math.round( Math.random( ) * 1 );
+if( tPosToggler == 0 )
+{
+	/* trace( "in upper right corner above pen" );
+	tChar.x = ( tLRBLeft ) + Math.random( ) * ( tLRBRight );
+	tChar.y = ( tULLTop ) + Math.random( ) * ( tULABottom ); */
+	
+	trace( "petpet in upper left corner above pen" );
+	tChar.x = ( tULLLeft ) + Math.random( ) * ( tLLBRight );
+	tChar.y = ( tULLTop ) + Math.random( ) * ( tULABottom );
+	
+	/* trace( "petpet in lower left corner below pen" );
+	tChar.x = ( tULLLeft ) + Math.random( ) * ( tLLBRight );
+	tChar.y = ( tLRBTop ) + Math.random( ) * ( tLRBBottom ); */
+	
+	/* trace( "petpet in lower right corner below pen" );
+	tChar.x = ( tLRBLeft ) + Math.random( ) * ( tLRBRight );
+	tChar.y = ( tLRBTop ) + Math.random( ) * ( tLRBBottom ); */
+}
+
+else
+{
+	/* trace( "petpet in lower left corner left of pen" );
+	tChar.x = ( tULLLeft ) + Math.random( ) * ( tULLRight );
+	tChar.y = ( tLRRTop ) + Math.random( ) * ( tLRRBottom ); */
+	
+	trace( "petpet in lower right corner right of pen" );
+	tChar.x = ( tURRLeft ) + Math.random( ) * ( tURRRight );
+	tChar.y = ( tLRRTop ) + Math.random( ) * ( tLRRBottom );
+	
+	/* trace( "petpet in upper right corner right of pen" );
+	tChar.x = ( tURRLeft ) + Math.random( ) * ( tURRRight );
+	tChar.y = ( tULLTop ) + Math.random( ) * ( tULLBottom ); */
+	
+	/* trace( "petpet in upper left corner left of pen" );
+	tChar.x = ( tULLLeft ) + Math.random( ) * ( tULLRight );
+	tChar.y = ( tULLTop ) + Math.random( ) * ( tULLBottom );  */ 
+}
+addChild( tChar );

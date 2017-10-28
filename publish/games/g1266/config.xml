@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG type="Object">
+<!--
+	############### GENERAL NOTES #######################
+-->
+	
+	<SETUP type="Object">
+
+		<SOUNDS type="Factory">
+			<SOUND type="Canvas">
+				<id type="String">BtnSound</id>
+				<type type="Combo" data="SoundFileisinLibrary,SoundFileisExternal" default="SoundFileisinLibrary">SoundFileisinLibrary</type>
+			</SOUND>
+			<SOUND type="Canvas">
+				<id type="String">ClickSound</id>
+				<type type="Combo" data="SoundFileisinLibrary,SoundFileisExternal" default="SoundFileisinLibrary">SoundFileisinLibrary</type>
+			</SOUND>
+			<SOUND type="Canvas">
+				<id type="String">RolloverSound</id>
+				<type type="Combo" data="SoundFileisinLibrary,SoundFileisExternal" default="SoundFileisinLibrary">SoundFileisinLibrary</type>
+			</SOUND>
+			<SOUND type="Canvas">
+				<id type="String">TryAgainSound</id>
+				<type type="Combo" data="SoundFileisinLibrary,SoundFileisExternal" default="SoundFileisinLibrary">SoundFileisinLibrary</type>
+			</SOUND>
+			<SOUND type="Canvas">
+				<id type="String">YouWinSound</id>
+				<type type="Combo" data="SoundFileisinLibrary,SoundFileisExternal" default="SoundFileisinLibrary">SoundFileisinLibrary</type>
+			</SOUND>
+				<SOUND type="Canvas">
+				<id type="String">Music</id>
+				<type type="Combo" data="SoundFileisinLibrary,SoundFileisExternal" default="SoundFileisinLibrary">SoundFileisinLibrary</type>
+			</SOUND>
+			
+		</SOUNDS>
+	</SETUP>
+	
+	<!-- This is the Location of the Source Items for the Interface -->
+	<LOADLIST type="Factory">
+	
+		<ITEM type="canvas">
+				<assetname type="String">shell_assets.swf</assetname>
+				<id type="String">externalAssetStorage</id>
+				<applicationdomain type="String" default="add_child">add_child</applicationdomain>
+		</ITEM>
+		<ITEM type="canvas">
+				<assetname type="String">assets_v3.swf</assetname>
+				<id type="String">externalAssetStorage</id>
+				<applicationdomain type="String" default="add_child">add_child</applicationdomain>
+		</ITEM>
+	</LOADLIST>
+	<!-- This is the levels description -->
+	<LEVELS>
+		<!-- This is the FOREST level -->
+		<level height="15000">
+		<parameters g="3" drag=".98" bounce="5" hookforce="60" ropepull="30" slowdown="80"/>
+			<background>
+				<layer>
+					<zone start="0">
+						<panel class="forest" height="600"/>
+					</zone>
+				</layer>
+			</background>
+			<ground class="dirt"/>
+			<platforms>
+				<spacing end="10000">
+					<range min="50" max="200"/>
+					<range min="200" max="400"/>
+				</spacing>
+				<type class="ledge_wood"/>
+				<type class="ledge_kite">
+					<zone start="0" weight="0.2"/>
+				 	<zone start="5000" weight="0.3"/>
+				 	<zone start="10000" weight="0.4"/>
+				</type>
+			</platforms>
+			<powerups>
+				<zone start="0">
+					<range min="500" max="2000"/>
+				</zone>
+				<zone start="10000">
+					<range min="300" max="900"/>
+				</zone>
+				<type class="fixed_powerup"/>
+			</powerups>
+		</level>;
+		<!-- This is the MOUNTAIN level  -->
+		<level height="30000">
+			<parameters g="5" drag=".98" bounce="5" hookforce="60" ropepull="40" slowdown="2"/>
+			<background>
+				<layer>
+					<zone start="0">
+						<panel class="mountain" height="600"/>
+					</zone>
+				</layer>
+			</background>
+			<ground class="dirt"/>
+			<platforms>
+				<spacing end="20000">
+					<range min="100" max="250"/>
+					<range min="250" max="450"/>
+				</spacing>
+				<type class="ledge_rock_lg"/>
+				<type class="ledge_rock_md">
+					<zone start="10000" weight="2"/>
+				</type>
+				<type class="ledge_rock_sm">
+					<zone start="20000" weight="2"/>
+				</type>
+				<type class="ledge_kite">
+					<zone start="0" weight="0.4"/>
+				 	<zone start="10000" weight="1"/>
+				</type>
+			</platforms>
+			<powerups>
+				<zone start="0">
+					<range min="100" max="500"/>
+					<combo limit="5" spread="200"/>
+				</zone>
+				<zone start="10000">
+					<range min="200" max="800"/>
+				</zone>
+				<zone start="20000">
+					<range min="300" max="900"/>
+					<combo limit="2" spread="100"/>
+				</zone>
+				<type class="fixed_powerup">
+					<zone start="0" weight="1"/>
+					<zone start="10000" weight="2"/>
+				</type>
+				<type class="ClusterPowerup_backslash">
+					<zone start="0" weight="0"/>
+					<zone start="10000" weight="1"/>
+				</type>
+				<type class="ClusterPowerup_halfcircle">
+					<zone start="0" weight="0"/>
+					<zone start="20000" weight="1"/>
+				</type>
+			</powerups>
+		</level>;
+		<!-- This is the ICE MOUNTAIN level  -->
+		<level height="60000">
+			<parameters g="8" drag=".98" bounce="5" hookforce="60" ropepull="50" slowdown="2"/>
+			<background>
+				<layer>
+					<zone start="0">
+						<panel class="ice_mountain" height="600"/>
+					</zone>
+				</layer>
+			</background>
+			<ground class="dirt"/>
+			<platforms>
+				<spacing end="40000">
+					<range min="150" max="300"/>
+					<range min="300" max="500"/>
+				</spacing>
+				<type class="ledge_ice"/>
+				<type class="ledge_ice_break">
+					<zone start="0" weight="0"/>
+					<zone start="20000" weight="0.5"/>
+					<zone start="40000" weight="1"/>
+				</type>
+				<type class="ledge_kite">
+					<zone start="0" weight="0.3"/>
+					<zone start="20000" weight="0.4"/>
+					<zone start="40000" weight="0.5"/>
+				</type>
+			</platforms>
+			<powerups>
+				<zone start="0">
+					<range min="300" max="900"/>
+				</zone>
+				<zone start="20000">
+					<range min="400" max="1000"/>
+					<combo limit="2" spread="0"/>
+				</zone>
+				<zone start="40000">
+					<range min="400" max="1200"/>
+					<combo limit="2" spread="100"/>
+				</zone>
+				<type class="fixed_powerup"/>
+				<type class="ClusterPowerup_backslash">
+					<zone start="0" weight="1"/>
+					<zone start="40000" weight="0"/>
+				</type>
+				<type class="ClusterPowerup_halfcircle"/>
+				<type class="ClusterPowerup_circle">
+					<zone start="0" weight="0"/>
+					<zone start="20000" weight="1"/>
+				</type>
+			</powerups>
+		</level>;
+		<!-- This is the SKY level, the endless one -->
+		<level>
+			<parameters g="10" drag=".98" bounce="5" hookforce="60" ropepull="60" slowdown="2"/>
+			<background>
+				<layer>
+					<zone start="0">
+						<panel class="sky" height="600"/>
+					</zone>
+				</layer>
+			</background>
+			<ground class="dirt"/>
+			<platforms>
+				<spacing end="30000">
+					<range min="50" max="200"/>
+					<range min="300" max="500"/>
+				</spacing>
+				<type class="ledge_cloud"/>
+				<type class="ledge_cloud_dissolve">
+					<zone start="0" weight="0"/>
+					<zone start="15000" weight="0.5"/>
+					<zone start="30000" weight="1"/>
+				</type>
+				<type class="ledge_kite">
+					<zone start="0" weight="0.2"/>
+					<zone start="15000" weight="0.4"/>
+					<zone start="30000" weight="0.6"/>
+				</type>
+			</platforms>
+			<powerups>
+				<zone start="0">
+					<range min="400" max="1200"/>
+				</zone>
+				<zone start="15000">
+					<range min="400" max="1000"/>
+					<combo limit="3" spread="50"/>
+				</zone>
+				<zone start="30000">
+					<range min="300" max="900"/>
+					<combo limit="2" spread="100"/>
+				</zone>
+				<type class="flying_powerup">
+					<zone start="0" weight="0"/>
+					<zone start="15000" weight="0.5"/>
+					<zone start="30000" weight="1"/>
+				</type>
+				<type class="fixed_powerup">
+					<zone start="0" weight="1"/>
+					<zone start="15000" weight="2"/>
+					<zone start="30000" weight="4"/>
+				</type>
+				<type class="ClusterPowerup_backslash">
+					<zone start="0" weight="0"/>
+					<zone start="30000" weight="1"/>
+				</type>
+				<type class="ClusterPowerup_halfcircle">
+					<zone start="0" weight="0"/>
+					<zone start="15000" weight="1"/>
+				</type>
+				<type class="ClusterPowerup_circle"/>
+			</powerups>
+		</level>;
+		<!-- TEMPLATE + NOTES
+		note: height represents the height of the level. You can use this info to determine when the level ends
+		<level height="20000">
+			<background>
+				<layer>
+					note: zones are the areas where a certain bg is used. The 'start' attribute determines at which height the bg listed starts
+					<zone start="0">
+						<panel class="bg0_mc" height="600"/>
+					</zone>
+					<zone start="5000">
+						<panel class="bg1_mc" height="600"/>
+					</zone>
+				</layer>
+			</background>
+			<ground class="dirt"/>
+			<platforms>
+			note: the 'end' attribute indicates when the first spacing range ends and the second range listed starts. Only two ranges are available for each level with the current system.
+				<spacing end="1000">
+					note: the algorithm will select a random spacing between the two values.
+					<range min="20" max="100"/>
+					<range min="100" max="300"/>
+				</spacing>
+				<type class="ledge_wood">
+					note: the 'start' attribute determines where this type of ledge will start appearing. The 'weight' attribute is used to calibrate the frequency of this type of platform
+					<zone start="100" weight="1"/>
+					<zone start="500" weight="2"/>
+				</type>
+				<type class="ledge_rock">
+					<zone start="100" weight="1"/>
+					<zone start="500" weight="2"/>
+				</type>
+				<type class="ledge_ice">
+					<zone start="0" weight="1"/>
+				</type>
+				<type>
+					<type class="ledge_cloud">
+					<zone start="100" weight="1"/>
+					<zone start="500" weight="2"/>
+				</type>
+			</platforms>
+			<powerups>
+				note: powerups support the use of 'weight' like the platoforms. Here is not useed since there is only one powerup at the time
+				adding a "start" atribute to the zone tag will determine where that zone will start. Default is 0.
+				<zone>
+					<range min="50" max="400"/>
+				</zone>
+				<type class="kite"/>
+			</powerups>
+		</level>;
+		 -->
+	</LEVELS>
+</CONFIG>
+

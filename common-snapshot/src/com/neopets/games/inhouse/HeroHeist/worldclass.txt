@@ -1,0 +1,475 @@
+//-------------------------------------------------------
+_global.WorldClass = function(pX, pY, gameObj, tileW, tileH) {
+	this.init(pX, pY, gameObj, tileW, tileH);
+};
+//-------------------------------------------------------
+WorldClass.extend(SpriteClass);
+//-------------------------------------------------------
+var obj = WorldClass.prototype;
+//-------------------------------------------------------
+// TEMP -- MASS ENEMY SUICIDE //
+obj.tempSkipLevels = function() {
+	this.clearEnemies();
+	this.pList.enemies = [];
+	gGame.nextLevel();
+	//this._parent.killAllEnemies();
+};
+obj.killAllEnemies = function() {
+	this.clearEnemies();
+	this.pList.enemies = [];
+	this.checkRoundOver();
+};
+obj.clearEnemies = function() {
+	var max = this.pList.enemies.length;
+	for (var x = 0; x < max; x++) {
+		var obj = this.pList.enemies[x];
+		obj.removeMovieClip();
+	}
+};
+obj.clearPowerups = function() {
+	var max = this.pList.pickupItems.length;
+	for (var x = 0; x < max; x++) {
+		var obj = this.pList.pickupItems[x];
+		obj.removeMovieClip();
+	}
+};
+//<>
+obj.onRoundTimeUp = function() {
+	//round time is up
+	this.player.die();
+	gPlayList.playSound("timeUpSound");
+	this.makeTimerMessage(2);
+};
+obj.onPromptRemove = function() {
+	this.player.onEnterFrame = this.player.efc;
+	Key.addListener(this.player);
+	//turn on enemies
+	var max = this.pList.enemies.length;
+	for (var x = 0; x < max; x++) {
+		var obj = this.pList.enemies[x];
+		//obj._visible = 1;
+		//obj.onEnterFrame = obj.efc;
+		obj.sparkle.play();
+	}
+	//start the round time
+	this.sb.initializeTimer(this.pRoundTime);
+};
+obj.getEnemyList = function() {
+	return this.pList.enemies;
+};
+//----------------get a tile
+obj.getTile = function(clip_x, clip_y) {
+	var level_mc = this["level_" + this.pLevel + "_mc"];
+	var pX = Math.floor(clip_x / this.pTileWidth);
+	var pY = Math.floor(clip_y / this.pTileHeight);
+	var tile = level_mc["tile_" + pX + "-" + pY];
+	return tile;
+};
+//-------------get a tile's type
+obj.getGridPos = function(clip_x, clip_y) {
+	var level_mc = this["level_" + this.pLevel + "_mc"];
+	var pX = Math.floor(clip_x / this.pTileWidth);
+	var pY = Math.floor(clip_y / this.pTileHeight);
+	var tile_type = level_mc["tile_" + pX + "-" + pY].getType();
+	return tile_type;
+};
+obj.getNumCols = function() {
+	return this.pNumCols;
+};
+obj.getNumRows = function() {
+	return this.pNumRows;
+};
+//-------------------------------------------------------LAY OUT THE TILES
+obj.buildLevel = function() {
+	//reset tile lists
+	this.pList.allTiles = [];
+	this.pList.pickupTiles = [];
+	//------------------------------------------------------------
+	// remove the current level if restarting
+	//------------------------------------------------------------
+	var thisLevel = this["level_" + this.pLevel + "_mc"];
+	if (thisLevel != undefined) {
+		thisLevel.removeMovieClip();
+	}
+	//------------------------------------------------------------
+	//make an empty movie clip to put everything in
+	var level_mc = this.createEmptyMovieClip("level_" + this.pLevel + "_mc", this.pDepths.levelMC);
+	this.pDepths.levelMC++;
+	//every 6 levels, switch out background and tile graphics
+	var levelGraphicsNum = this.pGame.getGraphicsSet();
+	//refresh the game background
+	//this.attachMovie("gameBG_" + levelGraphicsNum, "bg", this.pDepths.bg);
+	var map = this.pGame.getMap();
+	this.pNumCols = map.length;
+	this.pNumRows = map[0].length;
+	var pX = 0;
+	var pY = 0;
+	for (var x = 0; x < this.pNumCols; x++) {
+		for (var y = 0; y < this.pNumRows; y++) {
+			var tile_type = map[x][y];
+			//don't attach a blank tile, valid tiles are 1-99
+			if (tile_type != 0) {
+				if (tile_type < 100) {
+					var tile = "tile" + levelGraphicsNum + "_" + tile_type;
+					var obj = level_mc.attachMovie(tile, "tile_" + x + "-" + y, this.pDepths.tiles);
+					obj.mcExtends(TileClass, pX, pY, tile_type);
+					//fix bitmap distortion
+					obj._alpha = 99;
+					this.pList.allTiles.push(obj);
+					this.pDepths.tiles++;
+					//push the block tiles (type 1) not on edges  AND WITHOUT TILE ABOVE into array for random item location // 
+					if (tile_type == 1 and y != 0 and y != (this.pNumRows - 1) and x != 0 and x != (this.pNumCols - 1)) {
+						if (level_mc["tile_" + x + "-" + (y - 1)] == undefined) {
+							this.pList.pickupTiles.push(obj);
+						}
+					}
+				} else {
+					// it's an enemy
+					var tile = "tile" + tile_type;
+					var modDepth = this.pDepths.enemy + (this.pDepths.enemyNum % 1000);
+					var obj = this.attachMovie(tile, "tile_" + x + "-" + y, modDepth);
+					//if (this.pLevel != 1) {
+					//		obj._visible = 0;
+					//}
+					this.pList.enemies.append(obj);
+					//------------------------------------
+					// Enemy Properties - pX, pY, pGame, tileW, tileH, pPlayer
+					//------------------------------------Enemy Classes
+					// EnemyClass - superClass
+					//-------------------------------------
+					// ZombieKacheekClass
+					// GhostChiaClass
+					//  GhostJubJubClass
+					// ZombieShoyruClass
+					// WerelupeClass
+					// DarkFaerieClass
+					//------------------------------------
+					switch (tile_type) {
+					case 100 :
+						var enemy_class = "ZombieKacheekClass";
+						break;
+					case 101 :
+						var enemy_class = "GhostChiaClass";
+						break;
+					case 102 :
+						var enemy_class = "GhostJubJubClass";
+						break;
+					case 103 :
+						var enemy_class = "ZombieShoyruClass";
+						break;
+					case 104 :
+						var enemy_class = "WerelupeClass";
+						break;
+					case 105 :
+						var enemy_class = "DarkFaerieClass";
+						break;
+					default :
+						// nothing
+					}
+					obj.mcExtends(eval(enemy_class), pX + obj.hitmap._width / 2, pY + obj.hitmap._height / 2, this.pGame, this.pTileWidth, this.pTileHeight, this.player);
+					this.pDepths.enemyNum++;
+				}
+			}
+			pY += this.pTileHeight;
+		}
+		pY = 0;
+		pX += this.pTileWidth;
+	}
+};
+//-------------------------------------------------------
+obj.makeBullet = function(clip, pX, pY, bulletGraphic, dir) {
+	var targetList = (clip == this.player) ? (this.pList.enemies) : ([this.player]);
+	var modDepth = this.pDepths.bullets + (this.pDepths.bulletNum % 100);
+	var obj = this.attachMovie(bulletGraphic, "bullet" + this.pDepths.bulletNum, modDepth);
+	obj.mcExtends(BulletClass, pX, pY, dir, targetList);
+	this.pDepths.bulletNum++;
+};
+//-------------------------------------------------------
+obj.makeAngledBullet = function(clip, pX, pY, bulletGraphic, dir) {
+	var modDepth = this.pDepths.bullets + (this.pDepths.bulletNum % 100);
+	var obj = this.attachMovie(bulletGraphic, "bullet" + this.pDepths.bulletNum, modDepth);
+	obj.mcExtends(AngledBulletClass, pX, pY, dir, this.player, this.pBounds);
+	this.pDepths.bulletNum++;
+};
+//-------------------------------------------------------
+obj.makePlayer = function(enable_keys) {
+	var obj = this.attachMovie("playerSymbol", "player", this.pDepths.player);
+	EventbroadCaster.initialize(obj);
+	obj.addListener(this);
+	//placement
+	var pX = (this.pNumCols / 2) * this.pTileWidth;
+	var pY = ((this.pNumRows - 1) * this.pTileHeight) - obj.hitmap._height / 2;
+	obj.mcExtends(PlayerClass, pX, pY, this.pGame, this.pTileWidth, this.pTileHeight, enable_keys);
+};
+//-------------------------------------------------------
+// make a prompt
+// 1 = start round , 2 = end round , 3 = end game / not enough collected , 4=end game/no lives
+//-------------------------------------------------------
+obj.makePrompt = function(num) {
+	var obj = this.attachMovie("promptSymbol", "prompt_" + num, this.pDepths.prompt);
+	var pX = -obj._width;
+	var pY = this.pBounds.yCenter;
+	var xDest = this.pBounds.xCenter;
+	obj.mcExtends(PromptClass, pX, pY, xDest, num, this.pGame);
+};
+obj.onHurryUp = function() {
+	this.makeTimerMessage(1);
+};
+//------------------------------------------------------
+obj.makeTimerMessage = function(messageNum) {
+	var obj = this.attachMovie("timerMessageSymbol", "timerMessage_" + num, this.pDepths.prompt);
+	var pX = -obj._width;
+	var pY = (this.pTileWidth * 2);
+	var xDest = this.pBounds.xCenter;
+	obj.mcExtends(TimerMessageClass, pX, pY, xDest, messageNum, this.pGame);
+};
+//-------------------------------------------------------
+obj.makeTimer = function() {
+	var obj = this.createEmptyMovieClip("timer", this.pDepths.timer);
+	obj.mcExtends(TimerClass, this.pEnemyTime, this.pPowerupTime, this.pRoundTime, this.sb.timerBar.meter, this.pBalloonTime);
+	EventbroadCaster.initialize(obj);
+	obj.addListener(this);
+	//decrease for next round
+	this.pTimeLimits.enemy -= 500;
+	this.pTimeLimits.powerUp += 500;
+};
+obj.resetLevel = function() {
+	//get the level #
+	this.pLevel = this.pGame.getLevel();
+	//clear the enemies left  and pickup items
+	this.clearEnemies();
+	this.clearPowerups();
+	//disable key input
+	this.player.disableKeys();
+	this.newLevel_mc.removeMovieClip();
+	// FIX THIS HERE TO TELEPORT W/OUT CHECKING TOP/BOTTOM 
+	this.player.startTeleport(this.player.remove, 1);
+	//update the scoreboard
+	this.sb.updateLevel();
+	//make the next level
+	this.buildLevel();
+	this.levelStart();
+};
+obj.onResetLevel = function() {
+	this.resetLevel();
+};
+//-------------------------------------------------------
+// NEXT LEVEL CODE
+//------------------------------------------------------
+obj.onNextLevel = function() {
+	this.pRoundDone = 1;
+	//get the level #
+	this.pLevel = this.pGame.getLevel();
+	//clear the enemies left and pickup items
+	this.clearEnemies();
+	this.clearPowerups();
+	if (this.player != undefined) {
+		//disable key input
+		this.player.disableKeys();
+		// FIX THIS HERE TO TELEPORT W/OUT CHECKING TOP/BOTTOM 
+		this.player.startTeleport(this.player.remove, 1);
+	}
+	//update the scoreboard
+	this.sb.updateLevel();
+	//make the next level
+	this.buildLevel();
+	if (this.pLevel != 1) {
+		this.newLevel_mc = this["level_" + this.pLevel + "_mc"];
+		this.oldLevel_mc = this["level_" + (this.pLevel - 1) + "_mc"];
+		this.newLevel_mc._y = -this.pBounds.yMax;
+		this.onEnterFrame = function() {
+			this.oldLevel_mc._y += this.pTileHeight / 3;
+			this.newLevel_mc._y += this.pTileHeight / 3;
+			if (this.newLevel_mc._y >= 0) {
+				this.newLevel_mc._y = 0;
+				this.oldLevel_mc.removeMovieClip();
+				this.onEnterFrame = undefined;
+				this.levelStart();
+			}
+		};
+	} else {
+		this.levelStart();
+	}
+};
+obj.setPlayer = function() {
+	//set the player out
+	var pX = (this.pNumCols / 2) * this.pTileWidth;
+	var pY = ((this.pNumRows - 1) * this.pTileHeight) - this.player.hitmap._height / 2;
+	//set the player
+	this.player._x = pX;
+	this.player._y = pY;
+};
+obj.levelStart = function() {
+	this.pGame.startMusic();
+	this.pRoundDone = 0;
+	this.makePlayer(1);
+	this.player.setEnemyList(this.pList.enemies);
+	this.setPlayer();
+	//turn on enemies
+	var max = this.pList.enemies.length;
+	for (var x = 0; x < max; x++) {
+		var obj = this.pList.enemies[x];
+		obj.sparkle.gotoAndPlay(2);
+	}
+	//start the round time
+	this.sb.initializeTimer(this.pRoundTime);
+	/**/
+};
+obj.showCard = function(pX, pY) {
+	var obj = this.attachMovie("cardSymbol", "card", this.pDepths.card);
+	obj.mcExtends(TradingCardClass, pX, pY, this.pBounds);
+};
+//flip the card over, load the jpeg ...
+obj.flipTheCard = function() {
+	var obj = this.attachMovie("cardFlip_mc", "cardFlip_mc", this.pDepths.cardFlip_mc);
+	var card = gGame.getCard();
+	var name = card.getName();
+	var description = card.getDescription();
+	var cardsLeft = gGame.getCardsLeft();
+	var msg_str = (cardsLeft == 0) ? ("Congratulations, you found all the Heroes and defeated Hubrid!!!") : ("Congratulations, only " + cardsLeft + " Heroes left to find and Hubrid will be defeated!!!");
+	var textMsg = "<P ALIGN='CENTER'><FONT SIZE='20'>" + msg_str + "</FONT></P>";
+	obj.displayText = "<P ALIGN='CENTER'><FONT SIZE='26'>You Found  " + name + "</FONT></P>" + textMsg;
+};
+//------------------------------------------------
+obj.showTreasure = function() {
+	//pick a random spot
+	var max = this.pList.pickupTiles.length;
+	var randomLoc = this.pList.pickupTiles[random(max)];
+	var obj = this.attachMovie("treasureChest", "treasureChest", this.pDepths.treasureChest);
+	var pX = this.pBounds.xCenter;
+	var pTargetY = this.pBounds.yMax - this.pTileHeight;
+	var pY = -128;
+	obj.mcExtends(TreasureChestClass, pX, pY, pTargetY, this.player);
+};
+obj.roundOver = function() {
+	this.pRoundDone = 1;
+	//this.player.disableKeys();
+	this.sb.timer_mc.stopTimer();
+	var timeBonus = Math.floor(this.sb.timer_mc.getTimeLeft() / 1000) * 10;
+	this.pGame.setTimeBonus(timeBonus);
+	this.pGame.changeScoreBy(timeBonus);
+};
+obj.endRound = function(doPause) {
+	if (this.treasureChest) {
+		this.treasureChest.removeMovieClip();
+	}
+	var allLevelsClear = this.pGame.checkAllLevelsClear();
+	if (allLevelsClear == 1) {
+		this.makePrompt(3);
+	} else {
+		if (doPause) {
+			this.pGame.fadeMusic("out");
+			//HERE PAUSE 5 SEC FOR NEXT LEVEL
+			var obj = this.createEmptyMovieClip("pauseTimer", this.pDepths.endRoundPauseClip);
+			obj.startTime = getTimer();
+			obj.onEnterFrame = function() {
+				var elapsed = getTimer() - this.startTime;
+				if (elapsed > 5000) {
+					gPlayList.playSound("betweenLevelSound");
+					this._parent.pGame.nextLevel();
+					this.onEnterFrame = undefined;
+				}
+			};
+		} else {
+			gPlayList.playSound("betweenLevelSound");
+			this.pGame.nextLevel();
+		}
+	}
+};
+//<ADD the treasure chest here>
+obj.checkRoundOver = function() {
+	if (this.pList.enemies.length == 0) {
+		this.roundOver();
+		//show treasure chest every third level
+		if (this.pLevel % 6 == 0) {
+			this.pGame.fadeMusic("out");
+			this.player.disableKeys();
+			this.showTreasure();
+		} else {
+			this.endRound(1);
+		}
+	}
+};
+obj.showPickupPoints = function(pointValue, clipX, clipY) {
+	var modDepth = this.pDepths.showPickupPts + (this.pDepths.showPtsNum % 25);
+	var obj = this.attachMovie("pickup_showPoints_mc", "showPts" + this.pDepths.showPtsNum, modDepth);
+	obj._x = clipX;
+	obj._y = clipY;
+	obj.text_mc.info_txt.htmlText = "<P ALIGN='CENTER'>" + pointValue + "</P>";
+	this.pDepths.showPtsNum++;
+};
+obj.onGetPickup = function(pts, clip) {
+	this.pList.pickupItems.deleteOne(clip);
+	this.pGame.onGetPickup(pts);
+	var pointValue = pts;
+	var clipX = clip._x;
+	var clipY = clip._y;
+	this.showPickupPoints(pointValue, clipX, clipY);
+};
+//-------------------------------------------------------
+obj.makePickup = function() {
+	// pick random location
+	var max = this.pList.pickupTiles.length;
+	var randomLoc = this.pList.pickupTiles[random(max)];
+	// get a random pickup item
+	var randomItem = this.pGame.getRandomPickup();
+	var linkage = randomItem.getLinkageName();
+	var pointVal = randomItem.getPointValue();
+	var modDepth = this.pDepths.pickups + (this.pDepths.pickupNum % 100);
+	var obj = this.attachMovie(linkage, "pickup" + this.pDepths.pickupNum, modDepth);
+	var waitTime = 10000;
+	var pX = randomLoc._x + obj.hitmap._width / 2;
+	var pY = randomLoc._y - obj.hitmap._height / 2;
+	obj.mcExtends(PickupItemClass, pX, pY, waitTime, this.player, pointVal);
+	this.pList.pickupItems.push(obj);
+	this.pDepths.pickupNum++;
+};
+//-------------------------------------------------------
+obj.onEnemyDeath = function(mc) {
+	gPlayList.playSound("enemySplatSound");
+	this.pList.enemies.deleteOne(mc);
+	this.pGame.onEnemyDeath();
+	this.makePickup();
+	this.checkRoundOver();
+};
+//-------------------------------------------------------
+obj.onPlayerDeath = function() {
+	this.pGame.onPlayerDeath();
+	this.player.remove();
+	this.sb.updateLives();
+	// if the level ends and I die, dont' enable keys
+	if (this.pGame.getLives() > 0) {
+		var timeUp = this.sb.timer_mc.getTimeLeft();
+		if (timeUp > 0) {
+			this.makePlayer(1);
+			this.player.setEnemyList(this.pList.enemies);
+		}
+	} else {
+		//stop the timer
+		this.sb.timer_mc.stopTimer();
+	}
+};
+//-------------------------------------------------------
+obj.onGameOver = function() {
+	this.makePrompt(4);
+};
+obj.doCleanUp = function() {
+	Key.removeListener(this.player);
+};
+//-------------------------------------------------------
+// GAME ENDS -- REMOVE WORLD AND CLEAN UP
+//-------------------------------------------------------
+obj.onEndGame = function() {
+	this.doCleanUp();
+	this.removeMovieClip();
+};
+//-------------------------------------------------------WHEN THE USER QUITS
+obj.onQuitGame = function() {
+	this.makePrompt(5);
+	this.player.disableKeys();
+	this.clearEnemies();
+	this.clearPowerUps();
+};
+//-------------------------------------------------------
+AssetPropFlags(WorldClass.prototype, ["init", "makeEnemy", "makePlayer", "makePrompt", "remove"], 1);
+//-------------------------------------------------------

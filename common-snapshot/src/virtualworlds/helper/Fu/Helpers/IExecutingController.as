@@ -1,0 +1,1 @@
+﻿package virtualworlds.helper.Fu.Helpers{	public interface IExecutingController	{		function get lastExecutionTime():uint		function set outputExecutionTime(aBool:Boolean):void	}}

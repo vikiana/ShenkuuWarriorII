@@ -1,0 +1,72 @@
+swf location:
+
+\\tazzalor\groups\Multimedia\projects\internal\com\neopets\games\active\adaptions\BubbleMaster
+
+--------------------------------------------------------------
+
+In the original game, 'Automatically declare stage instances' was selected in the preferences, 
+so a large number of the properties were not declared in the classes.
+
+These properties have been added to the class so the game will work in the NP Game Engine. 
+
+-------------------------------------------------------------
+
+The original sound engine was replaced by the NP engine. 
+
+mSoundManager.soundPlay(SoundID_demo.SND_MUSIC, true);	
+
+
+When adding new sounds, make sure you have:
+
+- the correct linkage name and base class
+
+- the name assigned to a static const in YourGameName_SoundID.as
+
+- the SoundManager imports and instantiate (Singleton) in the class:
+
+ import com.neopets.util.sound.SoundManager;
+ import com.neopets.games.inhouse.YourGameName.YourGameName_SoundID; // not always needed
+
+ public var mSoundManager:SoundManager; 
+
+  mSoundManager = SoundManager.instance; // in constructor
+
+- the SoundManager function called in a class, like cannonEngine.as:
+mSoundManager.soundPlay(BubbleMaster_SoundID.SND_BTN_1, true);	
+
+
+
+-------------------------------------------------------------------
+
+Removed the original start screen and used the Neopets Scenes instead, adding the main game class to the 
+game screen.
+
+--------------------------------------------------------------------
+
+NP Scoring system - 
+
+
+There are several places in the code where the score is updated, so the Score Manager Singleton is used  
+in these classes:
+
+viewportEngine.as
+LevelScreen.as
+
+
+-------------------------------------------------------------------
+
+Bugs:
+
+TypeError: Error #2007: Parameter child must be non-null.
+	at flash.display::DisplayObjectContainer/removeChild()
+	at com.neopets.games.inhouse.BubbleMaster.game::cannonEngine/flightCheck()
+
+
+
+
+
+
+
+
+
+

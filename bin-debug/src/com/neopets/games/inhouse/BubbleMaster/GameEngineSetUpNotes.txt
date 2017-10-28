@@ -1,0 +1,15 @@
+Make sure the Fla file has a display graphic/bg in the 2nd layer that is the size of the stage. 
+
+Set the game number in Bubblemaster_Document.as and create a text doc in Zend with the same number. 
+
+Add the games folder to images50 with the correct game id and config file. Sound linkage names were added to the config file. 
+
+Created a BubbleMaster folder in the svn/inhouse folder:
+C:\subversion\common\trunk\src\com\neopets\games\inhouse\BubbleMaster
+
+
+
+
+
+
+

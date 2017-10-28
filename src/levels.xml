@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<level>
+	<background>
+		<layer>
+			<zone start="0">
+				<panel class="sunrise" height="100"/>
+			</zone>
+			<zone start="100">
+				<panel class="sky" height="200"/>
+			</zone>
+		</layer>
+	</background>
+	<ground class="dirt"/>
+	<platforms>
+		<spacing end="1000">
+			<range min="20" max="100"/>
+			<range min="100" max="300"/>
+		</spacing>
+		<type class="rock_ledge">
+			<zone start="0" weight="1"/>
+		</type>
+		<type class="icy_ledge">
+			<zone start="100" weight="1"/>
+			<zone start="500" weight="2"/>
+		</type>
+	</platforms>
+</level>;

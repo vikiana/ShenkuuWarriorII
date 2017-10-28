@@ -1,0 +1,496 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG type="Object">
+<!--
+	############### GENERAL NOTES #######################
+-->
+	
+	<SETUP type="Object">
+
+		<SOUNDS type="Factory">
+			<SOUND type="Canvas">
+				<id type="String">BtnSound</id>
+				<type type="Combo" data="SoundFileisinLibrary,SoundFileisExternal" default="SoundFileisinLibrary">SoundFileisinLibrary</type>
+			</SOUND>
+			<SOUND type="Canvas">
+				<id type="String">ClickSound</id>
+				<type type="Combo" data="SoundFileisinLibrary,SoundFileisExternal" default="SoundFileisinLibrary">SoundFileisinLibrary</type>
+			</SOUND>
+			<SOUND type="Canvas">
+				<id type="String">RolloverSound</id>
+				<type type="Combo" data="SoundFileisinLibrary,SoundFileisExternal" default="SoundFileisinLibrary">SoundFileisinLibrary</type>
+			</SOUND>
+			<SOUND type="Canvas">
+				<id type="String">TryAgainSound</id>
+				<type type="Combo" data="SoundFileisinLibrary,SoundFileisExternal" default="SoundFileisinLibrary">SoundFileisinLibrary</type>
+			</SOUND>
+			<SOUND type="Canvas">
+				<id type="String">YouWinSound</id>
+				<type type="Combo" data="SoundFileisinLibrary,SoundFileisExternal" default="SoundFileisinLibrary">SoundFileisinLibrary</type>
+			</SOUND>
+			<SOUND type="Canvas">
+				<id type="String">Pickup1</id>
+				<type type="Combo" data="SoundFileisinLibrary,SoundFileisExternal" default="SoundFileisinLibrary">SoundFileisinLibrary</type>
+			</SOUND>
+			<SOUND type="Canvas">
+				<id type="String">Pickup2</id>
+				<type type="Combo" data="SoundFileisinLibrary,SoundFileisExternal" default="SoundFileisinLibrary">SoundFileisinLibrary</type>
+			</SOUND>
+			<SOUND type="Canvas">
+				<id type="String">Pickup3</id>
+				<type type="Combo" data="SoundFileisinLibrary,SoundFileisExternal" default="SoundFileisinLibrary">SoundFileisinLibrary</type>
+			</SOUND>
+			<SOUND type="Canvas">
+				<id type="String">px2_fx</id>
+				<type type="Combo" data="SoundFileisinLibrary,SoundFileisExternal" default="SoundFileisinLibrary">SoundFileisinLibrary</type>
+			</SOUND>
+			<SOUND type="Canvas">
+				<id type="String">ComboPickup</id>
+				<type type="Combo" data="SoundFileisinLibrary,SoundFileisExternal" default="SoundFileisinLibrary">SoundFileisinLibrary</type>
+			</SOUND>
+			<SOUND type="Canvas">
+				<id type="String">HookThrow</id>
+				<type type="Combo" data="SoundFileisinLibrary,SoundFileisExternal" default="SoundFileisinLibrary">SoundFileisinLibrary</type>
+			</SOUND>
+			<SOUND type="Canvas">
+				<id type="String">hook_hard</id>
+				<type type="Combo" data="SoundFileisinLibrary,SoundFileisExternal" default="SoundFileisinLibrary">SoundFileisinLibrary</type>
+			</SOUND>
+			<SOUND type="Canvas">
+				<id type="String">hook_soft</id>
+				<type type="Combo" data="SoundFileisinLibrary,SoundFileisExternal" default="SoundFileisinLibrary">SoundFileisinLibrary</type>
+			</SOUND>
+			<SOUND type="Canvas">
+				<id type="String">Fail</id>
+				<type type="Combo" data="SoundFileisinLibrary,SoundFileisExternal" default="SoundFileisinLibrary">SoundFileisinLibrary</type>
+			</SOUND>
+			<SOUND type="Canvas">
+				<id type="String">ledge_break</id>
+				<type type="Combo" data="SoundFileisinLibrary,SoundFileisExternal" default="SoundFileisinLibrary">SoundFileisinLibrary</type>
+			</SOUND>
+			<SOUND type="Canvas">
+				<id type="String">Ambient1</id>
+				<type type="Combo" data="SoundFileisinLibrary,SoundFileisExternal" default="SoundFileisinLibrary">SoundFileisinLibrary</type>
+			</SOUND>
+			<SOUND type="Canvas">
+				<id type="String">Ambient2</id>
+				<type type="Combo" data="SoundFileisinLibrary,SoundFileisExternal" default="SoundFileisinLibrary">SoundFileisinLibrary</type>
+			</SOUND>
+			<SOUND type="Canvas">
+				<id type="String">Ambient3</id>
+				<type type="Combo" data="SoundFileisinLibrary,SoundFileisExternal" default="SoundFileisinLibrary">SoundFileisinLibrary</type>
+			</SOUND>
+			<SOUND type="Canvas">
+				<id type="String">Ambient4</id>
+				<type type="Combo" data="SoundFileisinLibrary,SoundFileisExternal" default="SoundFileisinLibrary">SoundFileisinLibrary</type>
+			</SOUND>
+		<SOUND type="Canvas">
+				<id type="String">menuloop</id>
+				<type type="Combo" data="SoundFileisinLibrary,SoundFileisExternal" default="SoundFileisinLibrary">SoundFileisinLibrary</type>
+			</SOUND>
+				<SOUND type="Canvas">
+				<id type="String">celebration</id>
+				<type type="Combo" data="SoundFileisinLibrary,SoundFileisExternal" default="SoundFileisinLibrary">SoundFileisinLibrary</type>
+			</SOUND>
+					<SOUND type="Canvas">
+				<id type="String">inflate</id>
+				<type type="Combo" data="SoundFileisinLibrary,SoundFileisExternal" default="SoundFileisinLibrary">SoundFileisinLibrary</type>
+			</SOUND>
+			<!--<SOUND type="Canvas">
+				<id type="String">Loop2</id>
+				<type type="Combo" data="SoundFileisinLibrary,SoundFileisExternal" default="SoundFileisinLibrary">SoundFileisinLibrary</type>
+			</SOUND>
+			<SOUND type="Canvas">
+				<id type="String">Loop3</id>
+				<type type="Combo" data="SoundFileisinLibrary,SoundFileisExternal" default="SoundFileisinLibrary">SoundFileisinLibrary</type>
+			</SOUND>
+			<SOUND type="Canvas">
+				<id type="String">Loop4</id>
+				<type type="Combo" data="SoundFileisinLibrary,SoundFileisExternal" default="SoundFileisinLibrary">SoundFileisinLibrary</type>
+			</SOUND> -->
+			<SOUND type="Canvas">
+				<id type="String">KitePowerup</id>
+				<type type="Combo" data="SoundFileisinLibrary,SoundFileisExternal" default="SoundFileisinLibrary">SoundFileisinLibrary</type>
+			</SOUND>
+			<SOUND type="Canvas">
+				<id type="String">PPPowerup</id>
+				<type type="Combo" data="SoundFileisinLibrary,SoundFileisExternal" default="SoundFileisinLibrary">SoundFileisinLibrary</type>
+			</SOUND>
+			<SOUND type="Canvas">
+				<id type="String">Grunt1</id>
+				<type type="Combo" data="SoundFileisinLibrary,SoundFileisExternal" default="SoundFileisinLibrary">SoundFileisinLibrary</type>
+			</SOUND>
+			<SOUND type="Canvas">
+				<id type="String">Grunt2</id>
+				<type type="Combo" data="SoundFileisinLibrary,SoundFileisExternal" default="SoundFileisinLibrary">SoundFileisinLibrary</type>
+			</SOUND>
+			<SOUND type="Canvas">
+				<id type="String">Grunt3</id>
+				<type type="Combo" data="SoundFileisinLibrary,SoundFileisExternal" default="SoundFileisinLibrary">SoundFileisinLibrary</type>
+			</SOUND>
+			<SOUND type="Canvas">
+				<id type="String">Falling</id>
+				<type type="Combo" data="SoundFileisinLibrary,SoundFileisExternal" default="SoundFileisinLibrary">SoundFileisinLibrary</type>
+			</SOUND>
+		</SOUNDS>
+	</SETUP>
+	
+	<!-- This is the Location of the Source Items for the Interface -->
+	<LOADLIST type="Factory">
+				<ITEM type="canvas">
+				<assetname type="String">sounds_v1.swf</assetname>
+				<id type="String">externalAssetStorage</id>
+				<applicationdomain type="String" default="add_child">add_child</applicationdomain>
+		</ITEM>
+		<ITEM type="canvas">
+				<assetname type="String">shell_assets_v1.swf</assetname>
+				<id type="String">externalAssetStorage</id>
+				<applicationdomain type="String" default="add_child">add_child</applicationdomain>
+		</ITEM>
+		<ITEM type="canvas">
+				<assetname type="String">assets_v6.swf</assetname>
+				<id type="String">externalAssetStorage</id>
+				<applicationdomain type="String" default="add_child">add_child</applicationdomain>
+		</ITEM>
+	</LOADLIST>
+	<!-- This is the levels description -->
+	<LEVELS>
+		<!-- This is the FOREST level -->
+		<level height="5400"> 
+		<parameters g="3" drag=".98" bounce="5" hookforce="60" ropepull="30" slowdown="80"/>
+		<!-- The background section allows for layers to create a parallax effect. Place in the last layer 
+		a single image that represents the farthest background. The calculation of the speed of all layers 
+		will be based on the relationship between the last image and the height of the level--> 
+			<background>
+				<layer>
+					<ground class="forest_floor" height="1800"/>
+					<top class="forest_top" height="1800"/>
+					<zone start="0">
+						<panel class="forest1" height="1800"/>
+						<panel class="forest2" height="1800"/>
+						<panel class="forest3" height="1800"/>
+					</zone>
+				</layer>
+				<layer>
+					<zone start="0">
+						<panel class="clouds" height="1800"/>
+						<panel class="clouds2" height="1800"/>
+					</zone>
+				</layer>
+				<!--Bottom layer: add the height property to calculate the parallax multipliers. Called back layer height ion -->
+				<layer height="1800">
+					<zone start="0">
+						<!-- the name of this bg layer works a bit different from the other symbols. A number is added programmatically at the end of the name, so the name of this symbol in the library has a (progressive) number attached to it. ie. forest_bkg1, forest_bkg2 etc.-->
+						<panel class="forest_bkg" height="1800"/>
+					</zone>
+				</layer>
+			</background>
+			<platforms>
+				<spacing end="10000">
+					<range min="50" max="200"/>
+					<range min="200" max="400"/>
+				</spacing>
+				<type class="ledge_wood"/>
+				<type class="ledge_wood2"/>
+				<type class="ledge_wood3"/>
+				<type class="ledge_kite">
+					<zone start="0" weight="0"/>
+				 	<zone start="5000" weight="0.2"/>
+				 	<zone start="10000" weight="0.3"/>
+				</type>
+			</platforms>
+			<powerups>
+				<zone start="0">
+					<range min="100" max="800"/>
+				</zone>
+				<zone start="8000">
+					<range min="100" max="600"/>
+				</zone>
+				<!--<type class="flying_powerup"/>
+				<type class="ledges_powerup"/>
+				<type class="fixed_powerup_GOLD"/>-->
+				
+				<type class="ClusterPowerup_silvermoon"/>
+				<type class="fixed_powerup_SILVER">
+					<zone start="0" weight="1"/>
+					<zone start="10000" weight="1"/>
+				</type>
+			</powerups>
+		</level>;
+		<!-- This is the MOUNTAIN level  -->
+		<level height="5400"> 
+			<parameters g="5" drag=".98" bounce="5" hookforce="60" ropepull="40" slowdown="2"/>
+			<background>
+				<layer>
+					<ground class="mountain_floor" height="1800"/>
+					<top class="mountain_top" height="1800"/>
+					<zone start="0">
+						<panel class="mountain1" height="1800"/>
+						<panel class="mountain2" height="1800"/>
+					</zone>
+				</layer>
+			</background>
+			<platforms>
+				<spacing end="15000">
+					<range min="100" max="250"/>
+					<range min="250" max="450"/>
+				</spacing>
+				<type class="ledge_rock_lg"/>
+				<type class="ledge_rock_md">
+					<zone start="10000" weight="2"/>
+				</type>
+				<type class="ledge_rock_sm">
+					<zone start="20000" weight="2"/>
+				</type>
+				<type class="ledge_kite">
+					<zone start="0" weight="0"/>
+				 	<zone start="10000" weight="0.7"/>
+				</type>
+			</platforms>
+			<powerups>
+				<zone start="0">
+					<range min="100" max="500"/>
+					<combo limit="5" spread="200"/>
+				</zone>
+				<zone start="10000">
+					<range min="200" max="800"/>
+				</zone>
+				<zone start="20000">
+					<range min="300" max="900"/>
+					<combo limit="2" spread="100"/>
+				</zone>
+				<type class="fixed_powerup_BRONZE">
+					<zone start="0" weight="1"/>
+					<zone start="10000" weight="0.5"/>
+				</type>
+				<type class="fixed_powerup_SILVER">
+					<zone start="0" weight="0"/>
+					<zone start="10000" weight="1"/>
+				</type>
+				<type class="ClusterPowerup_bronzestrike">
+					<zone start="0" weight="3"/>
+					<zone start="10000" weight="1"/>
+				</type>
+				<type class="ClusterPowerup_silverstrike">
+					<zone start="0" weight="0"/>
+					<zone start="20000" weight="0.5"/>
+				</type>
+			</powerups>
+		</level>;
+		<!-- This is the ICE MOUNTAIN level  -->
+		<level height="5400"> 
+			<parameters g="8" drag=".98" bounce="5" hookforce="60" ropepull="50" slowdown="2"/>
+			<background>
+				<layer>
+					<ground class="ice_mountain_floor" height="1800"/>
+					<top class="ice_mountain_top" height="1800"/>
+					<zone start="0">
+						<panel class="ice_mountain1" height="1800"/>
+						<panel class="ice_mountain2" height="1800"/>
+					</zone>
+				</layer>
+			</background>
+			<platforms>
+				<spacing end="40000">
+					<range min="150" max="300"/>
+					<range min="300" max="500"/>
+				</spacing>
+				<type class="ledge_ice_sm"/>
+				<type class="ledge_ice_lg"/>
+					<zone start="0" weight="1"/>
+					<zone start="20000" weight="0.5"/>
+					<zone start="40000" weight="0.5"/>
+				<type class="ledge_ice_break">
+					<zone start="0" weight="0.5"/>
+					<zone start="20000" weight="0.5"/>
+					<zone start="40000" weight="1"/>
+				</type>
+				<type class="ledge_kite">
+					<zone start="0" weight="0"/>
+					<zone start="20000" weight="0.4"/>
+					<zone start="40000" weight="0.5"/>
+				</type>
+			</platforms>
+			<powerups>
+				<zone start="0">
+					<range min="300" max="900"/>
+				</zone>
+				<zone start="20000">
+					<range min="400" max="1000"/>
+					<combo limit="2" spread="0"/>
+				</zone>
+				<zone start="40000">
+					<range min="400" max="1200"/>
+					<combo limit="2" spread="100"/>
+				</zone>
+				<type class="fixed_powerup_BRONZE"/>
+				<type class="fixed_powerup_SILVER"/>
+				<type class="fixed_powerup_GOLD"/>
+					<type class="ClusterPowerup_bronzestrike">
+					<zone start="0" weight="0"/>
+					<zone start="10000" weight="1"/>
+				</type>
+				<type class="ClusterPowerup_silverstrike">
+					<zone start="0" weight="0"/>
+					<zone start="20000" weight="0.5"/>
+				</type>
+				<type class="ClusterPowerup_silvermoon">
+					<zone start="0" weight="0.5"/>
+					<zone start="40000" weight="1"/>
+				</type>
+				<type class="ClusterPowerup_fullmoon">
+					<zone start="2000" weight="0.5"/>
+					<zone start="20000" weight="0"/>
+				</type>
+			</powerups>
+		</level>;
+		<!-- This is the SKY level, the endless one -->
+		<level>
+			<parameters g="8" drag=".98" bounce="5" hookforce="60" ropepull="60" slowdown="2"/>
+			<background>
+				<layer>
+					<ground class="sky_floor" height="1800"/>
+					<zone start="0">
+						<panel class="sky" height="1800"/>
+						<panel class="sky01" height="1800"/>
+					</zone>
+				</layer>
+				<layer>
+					<zone start="0">
+						<panel class="clouds" height="1800"/>
+						<panel class="clouds2" height="1800"/>
+					</zone>
+				</layer>
+				<!--Bottom layer: add the height property to calculate the parallax multipliers. Called backLayerHeight in Flash -->
+				<layer height="2700">
+					<zone start="0">
+						<panel class="sky_bkg" height="2700"/>
+					</zone>
+						<!--the second bkg will be generatet after the first bk height x 8 || NOT WORKING
+						<zone start="45000">
+						<panel class="sky_bkg2" height="5400"/>
+					</zone>
+						<zone start="88000">
+						<panel class="sky_bkg3" height="5400"/>
+					</zone>-->
+				</layer>
+			</background>
+			<ground class="dirt"/>
+			<platforms>
+				<spacing end="30000">
+					<range min="50" max="200"/>
+					<range min="200" max="200"/>
+				</spacing>
+				<type class="ledge_cloud">
+					<zone start="0" weight="1"/>
+					<zone start="15000" weight="1"/>
+					<zone start="30000" weight="1"/>
+					</type>
+				<!--<type class="ledge_cloud_break"/>
+				<type class="ledge_cloud_dissolve">
+					<zone start="0" weight="0"/>
+					<zone start="15000" weight="0.5"/>
+					<zone start="30000" weight="1"/>
+				</type>-->
+				<type class="ledge_kite">
+					<zone start="0" weight="0"/>
+					<zone start="15000" weight="0.4"/>
+					<zone start="30000" weight="0.7"/>
+				</type>
+			</platforms>
+			<powerups>
+				<zone start="0">
+					<range min="400" max="1200"/>
+				</zone>
+				<zone start="15000">
+					<range min="400" max="1000"/>
+					<combo limit="3" spread="50"/>
+				</zone>
+				<zone start="30000">
+					<range min="300" max="900"/>
+					<combo limit="2" spread="100"/>
+				</zone>
+				<type class="flying_powerup">
+					<zone start="0" weight="2"/>
+					<zone start="15000" weight="2"/>
+					<!-- <zone start="30000" weight="1"/> -->
+				</type>
+				<type class="ledges_powerup">
+					<zone start="0" weight="2"/>
+					<zone start="15000" weight="0.5"/>
+					<!-- <zone start="30000" weight="1"/> -->
+				</type>
+				<type class="fixed_powerup_SILVER"/>
+				<!--<type class="fixed_powerup_GOLD"/>
+				<type class="ClusterPowerup_silverstrike">
+					<zone start="0" weight="0"/>
+					<zone start="20000" weight="0.5"/>
+				</type>
+				<type class="ClusterPowerup_silvermoon">
+					<zone start="0" weight="0.5"/>
+					<zone start="40000" weight="1"/>
+				</type>
+				<type class="ClusterPowerup_fullmoon">
+					<zone start="2000" weight="0.5"/>
+					<zone start="20000" weight="0"/>
+				</type>
+					<type class="ClusterPowerup_star">
+					<zone start="0" weight="0.2"/>
+					<zone start="10000" weight="1"/>
+				</type>-->
+			</powerups>
+		</level>;
+		
+		<!-- TEMPLATE + NOTES
+		note: height represents the height of the level. You can use this info to determine when the level ends
+		<level height="20000">
+			<background>
+				<layer>
+					<ground class="forest_floor" height="1800"/>
+					<top class="forest_top" height="2500"/>
+					note: zones are the areas where a certain bg is used. The 'start' attribute determines at which height the bg listed starts
+					<zone start="0">
+						<panel class="bg0_mc" height="600"/>
+					</zone>
+					<zone start="5000">
+						<panel class="bg1_mc" height="600"/>
+					</zone>
+				</layer>
+			</background>
+			<platforms>
+			note: the 'end' attribute indicates when the first spacing range ends and the second range listed starts. Only two ranges are available for each level with the current system.
+				<spacing end="1000">
+					note: the algorithm will select a random spacing between the two values.
+					<range min="20" max="100"/>
+					<range min="100" max="300"/>
+				</spacing>
+				<type class="ledge_wood">
+					note: the 'start' attribute determines where this type of ledge will start appearing. The 'weight' attribute is used to calibrate the frequency of this type of platform
+					<zone start="100" weight="1"/>
+					<zone start="500" weight="2"/>
+				</type>
+				<type class="ledge_rock">
+					<zone start="100" weight="1"/>
+					<zone start="500" weight="2"/>
+				</type>
+				<type class="ledge_ice">
+					<zone start="0" weight="1"/>
+				</type>
+				<type>
+					<type class="ledge_cloud">
+					<zone start="100" weight="1"/>
+					<zone start="500" weight="2"/>
+				</type>
+			</platforms>
+			<powerups>
+				note: powerups support the use of 'weight' like the platforms. Here is not used since there is only one powerup at the time
+				adding a "start" atribute to the zone tag will determine where that zone will start. Default is 0.
+				<zone>
+					<range min="50" max="400"/>
+				</zone>
+				<type class="kite"/>
+			</powerups>
+		</level>;
+		 -->
+	</LEVELS>
+</CONFIG>
+
